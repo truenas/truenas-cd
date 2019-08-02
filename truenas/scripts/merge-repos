@@ -40,7 +40,15 @@ gpg --output /srv/mirror/tmp/archive-keyring/usr/share/keyrings/truenas-repo-key
 
 # Rebuild the Release and InRelease files
 cd ${DEBMIRROR}/dists/${DEBTARGET}
-apt-ftparchive  --md5 --sha256 release .  > Release
+apt-ftparchive \
+	-o APT::FTPArchive::Release::Origin="Debian" \
+	-o APT::FTPArchive::Release::Label="Debian" \
+	-o APT::FTPArchive::Release::Suite="testing" \
+	-o APT::FTPArchive::Release::Version="2.0" \
+	-o APT::FTPArchive::Release::Codename="bullseye" \
+	-o APT::FTPArchive::Release::Architectures="amd64" \
+	-o APT::FTPArchive::Release::Components="main contrib non-free local" \
+	--md5 --sha256 release .  > Release
 if [ $? -ne 0 ] ; then
 	echo "Failed running apt-ftparchive"
 	exit 1
