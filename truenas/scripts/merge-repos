@@ -27,7 +27,7 @@ do
 done < conf/dist-pkgs
 
 # Build the Packages.gz
-../tools/Packages-gen $DEBTARGET amd64
+#../tools/Packages-gen $DEBTARGET amd64
 
 gpg --list-keys | grep -q truenas-cd
 if [ $? -ne 0 ] ; then
