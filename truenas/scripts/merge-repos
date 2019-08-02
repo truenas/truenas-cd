@@ -40,13 +40,18 @@ if [ $? -ne 0 ] ; then
 	echo "Failed running apt-ftparchive"
 	exit 1
 fi
+rm Release.gpg
 gpg --default-key truenas-cd@localhost --armor --output Release.gpg --detach-sign Release
 if [ $? -ne 0 ] ; then
 	echo "Failed signing Release"
 	exit 1
 fi
+rm InRelease
 gpg --default-key truenas-cd@localhost --clearsign --output InRelease Release
 if [ $? -ne 0 ] ; then
 	echo "Failed signing InRelease"
 	exit 1
 fi
+
+# Export the key we just re-signed with so it can be used on ISO repo
+gpg --armor --export truenas-cd@localhost > conf/truenas-repo-key.gpg
