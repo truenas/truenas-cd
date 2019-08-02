@@ -407,7 +407,7 @@ export OMIT_RELEASE_NOTES=1
 # Set to 1 to not include the doc/tools directories on CD1
 # Useful to save space and avoids failures if you have a mirror
 # without those directories.
-#export OMIT_DOC_TOOLS=1
+export OMIT_DOC_TOOLS=1
 
 case "$OFFICIAL" in
     "Official")

@@ -6,9 +6,9 @@ DEBTARGET=bullseye
 TNMIRROR=/srv/mirror/truenas
 TNTARGET=bullseye-truenas-unstable
 
-# Create the local dist symlink
-ln -fs ${TNMIRROR}/dists/${TNTARGET}/main ${DEBMIRROR}/dists/${DEBTARGET}/local
-
+# Create the local dists directory with contents from the TrueNAS mirror
+rm -rf  ${DEBMIRROR}/dists/${DEBTARGET}/local
+cp -r ${TNMIRROR}/dists/${TNTARGET}/main ${DEBMIRROR}/dists/${DEBTARGET}/local
 
 while read distdir
 do
