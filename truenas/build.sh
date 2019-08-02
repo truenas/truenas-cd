@@ -18,6 +18,7 @@ case $1 in
 		make -C ../ distclean
 		;;
 	iso)
+		scripts/merge-repos
 		make -C ../ packagelists
 		make -C ../ image-trees
 		make -C ../ images CD=1
