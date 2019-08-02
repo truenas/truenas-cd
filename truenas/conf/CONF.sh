@@ -57,7 +57,7 @@ unset ARCHIVE_KEYRING_FILE    || true
 
 # The debian-cd dir
 # Where I am (hoping I'm in the debian-cd dir)
-export BASEDIR=`pwd/../`
+export BASEDIR=`pwd`/../
 
 # Name of the distribution for the image filename (Defaults to 'debian')
 export CDNAME=TrueNAS
