@@ -84,12 +84,14 @@ check_keyring() {
 
 }
 
-which -q debmirror
+# Ensure debmirror is installed
+which debmirror >/dev/null 2>/dev/null
 if [ $? -ne 0 ] ; then
 	echo "Missing 'debmirror' utilty, please install with 'apt install debmirror'"
 	exit 1
 fi
 
+# Ensure that debian-keyring is installed
 if [ ! -e "/usr/share/keyrings/debian-archive-keyring.gpg" ] ; then
 	echo "Missing debian-keyring, please install with 'apt install debian-keyring'"
 	exit 1
