@@ -46,9 +46,9 @@ apt-ftparchive \
 	-o APT::FTPArchive::Release::Suite="testing" \
 	-o APT::FTPArchive::Release::Version="2.0" \
 	-o APT::FTPArchive::Release::Codename="bullseye" \
-	-o APT::FTPArchive::Release::Architectures="amd64" \
+	-o APT::FTPArchive::Release::Architectures="amd64 arm64 armel armhf i386 mips mips64el mipsel ppc64el s390x" \
 	-o APT::FTPArchive::Release::Components="main contrib non-free local" \
-	--md5 --sha256 release .  > Release
+	--md5 --sha512 release .  > Release
 if [ $? -ne 0 ] ; then
 	echo "Failed running apt-ftparchive"
 	exit 1
