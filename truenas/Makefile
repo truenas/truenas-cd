@@ -12,5 +12,8 @@ update-mirrors: update-debian update-truenas
 clean: 
 	sh build.sh clean
 
+iso:
+	sh build.sh iso
+
 # Sync and build all
-all:
+all: update-debian update-truenas iso

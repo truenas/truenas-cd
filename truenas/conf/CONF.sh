@@ -57,10 +57,10 @@ unset ARCHIVE_KEYRING_FILE    || true
 
 # The debian-cd dir
 # Where I am (hoping I'm in the debian-cd dir)
-export BASEDIR=`pwd`
+export BASEDIR=`pwd/../`
 
 # Name of the distribution for the image filename (Defaults to 'debian')
-# export CDNAME=debian
+export CDNAME=TrueNAS
 
 # Building $codename cd set ...
 export CODENAME=bullseye
@@ -150,7 +150,7 @@ export CONTRIB=1
 # If you have a $MIRROR/dists/$CODENAME/local/binary-$ARCH dir with 
 # local packages that you want to put on the CD set then
 # uncomment the following line 
-# export LOCAL=1
+export LOCAL=1
 
 # If your local packages are not under $MIRROR, but somewhere else, 
 # you can uncomment this line and edit to to point to a directory
@@ -376,8 +376,8 @@ export SNAPURL=Debian=https://snapshot.debian.org/archive/debian/SNAPDATETIME/
 # INSTALLER_CD=0: nothing special (default)
 # INSTALLER_CD=1: just add debian-installer (use TASK=debian-installer)
 # INSTALLER_CD=2: add d-i and base (use TASK=debian-installer+kernel)
-#export INSTALLER_CD=2
-#export TASK=debian-installer+kernel
+export INSTALLER_CD=2
+export TASK=Debian-TrueNAS
 
 # Parameters to pass to kernel (or d-i) when the CD boots. Not currently
 # supported for all architectures.
