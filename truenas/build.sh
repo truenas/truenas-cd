@@ -21,7 +21,7 @@ case $1 in
 		scripts/merge-repos
 		make -C ../ packagelists
 		make -C ../ image-trees
-		make -C ../ images CD=1
+		make -C ../ images
 		make -C ../ imagesums
 		;;
 	*)

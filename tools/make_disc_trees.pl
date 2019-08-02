@@ -1082,6 +1082,7 @@ sub add_trans_desc_entry {
                 # so, we'll need to uncompress again on entry here.
 
                 if (-f "$trans_file.gz") {
+                    system("rm $trans_file");
                     system("gunzip $trans_file.gz");
                 }
 

@@ -395,7 +395,7 @@ export TASK=Debian-TrueNAS
 
 # Set to 1 to save space by omitting the installation manual. 
 # If so the README will link to the manual on the web site.
-#export OMIT_MANUAL=1
+export OMIT_MANUAL=1
 
 # Set to 1 to save space by omitting the release notes
 # If so we will link to them on the web site.
