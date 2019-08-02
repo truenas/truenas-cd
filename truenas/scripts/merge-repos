@@ -1,0 +1,25 @@
+#!/bin/sh
+
+DEBMIRROR=/srv/mirror/debian
+DEBTARGET=bullseye
+
+TNMIRROR=/srv/mirror/truenas
+TNTARGET=bullseye-truenas-unstable
+
+# Create the local dist symlink
+ln -fs ${TNMIRROR}/dists/${TNTARGET}/main ${DEBMIRROR}/dists/${DEBTARGET}/local
+
+
+while read distdir
+do
+	if [ ! -d "${TNMIRROR}/pool/main/${distdir}" ] ; then
+		echo "WARNING: Missing ${distdir} package directory"
+		continue
+	fi
+	if [ -d "${DEBMIRROR}/pool/main/${distdir}" ] ; then
+		echo "Cleanup: ${DEBMIRROR}/pool/main/${distdir}"
+		rm -rf "${DEBMIRROR}/pool/main/${distdir}"
+	fi
+	mkdir -p ${DEBMIRROR}/pool/main/${distdir}
+	cp -r ${TNMIRROR}/pool/main/${distdir}/* ${DEBMIRROR}/pool/main/${distdir}/
+done < conf/dist-pkgs
