@@ -35,7 +35,8 @@ if [ $? -ne 0 ] ; then
 	gpg --armor --export truenas-cd@localhost | apt-key add -
 fi
 # Export the key we just re-signed with so it can be used on ISO repo
-gpg --armor --export truenas-cd@localhost > conf/truenas-repo-key.gpg
+mkdir -p /srv/mirror/tmp/archive-keyring/usr/share/keyrings >/dev/null 2>/dev/null
+gpg --output /srv/mirror/tmp/archive-keyring/usr/share/keyrings/truenas-repo-key.gpg --export truenas-cd@localhost
 
 # Rebuild the Release and InRelease files
 cd ${DEBMIRROR}/dists/${DEBTARGET}
