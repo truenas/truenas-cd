@@ -23,3 +23,6 @@ do
 	mkdir -p ${DEBMIRROR}/pool/main/${distdir}
 	cp -r ${TNMIRROR}/pool/main/${distdir}/* ${DEBMIRROR}/pool/main/${distdir}/
 done < conf/dist-pkgs
+
+# Build the Packages.gz
+../tools/Packages-gen $DEBTARGET amd64
