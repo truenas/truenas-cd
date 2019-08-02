@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. ./CONF.sh
+. ./conf/CONF.sh
 
 exit_err() {
 	echo "$@"
