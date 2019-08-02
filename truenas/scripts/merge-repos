@@ -26,3 +26,27 @@ done < conf/dist-pkgs
 
 # Build the Packages.gz
 ../tools/Packages-gen $DEBTARGET amd64
+
+gpg --list-keys | grep -q truenas-cd
+if [ $? -ne 0 ] ; then
+	gpg --quick-generate-key --batch --pinentry-mode loopback --yes --passphrase '' truenas-cd@localhost
+	gpg --armor --export truenas-cd@localhost | apt-key add -
+fi
+
+# Rebuild the Release and InRelease files
+cd ${DEBMIRROR}/dists/${DEBTARGET}
+apt-ftparchive  --md5 --sha256 release .  > Release
+if [ $? -ne 0 ] ; then
+	echo "Failed running apt-ftparchive"
+	exit 1
+fi
+gpg --default-key truenas-cd@localhost --armor --output Release.gpg --detach-sign Release
+if [ $? -ne 0 ] ; then
+	echo "Failed signing Release"
+	exit 1
+fi
+gpg --default-key truenas-cd@localhost --clearsign --output InRelease Release
+if [ $? -ne 0 ] ; then
+	echo "Failed signing InRelease"
+	exit 1
+fi

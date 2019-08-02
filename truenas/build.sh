@@ -19,6 +19,9 @@ case $1 in
 		;;
 	iso)
 		scripts/merge-repos
+		if [ $? -ne 0 ] ; then
+			exit 1
+		fi
 		make -C ../ packagelists
 		make -C ../ image-trees
 		make -C ../ images
