@@ -1,5 +1,7 @@
 #!/bin/sh
 
+CURDIR=$(pwd)
+
 DEBMIRROR=/srv/mirror/debian
 DEBTARGET=bullseye
 
@@ -32,6 +34,8 @@ if [ $? -ne 0 ] ; then
 	gpg --quick-generate-key --batch --pinentry-mode loopback --yes --passphrase '' truenas-cd@localhost
 	gpg --armor --export truenas-cd@localhost | apt-key add -
 fi
+# Export the key we just re-signed with so it can be used on ISO repo
+gpg --armor --export truenas-cd@localhost > conf/truenas-repo-key.gpg
 
 # Rebuild the Release and InRelease files
 cd ${DEBMIRROR}/dists/${DEBTARGET}
@@ -53,5 +57,3 @@ if [ $? -ne 0 ] ; then
 	exit 1
 fi
 
-# Export the key we just re-signed with so it can be used on ISO repo
-gpg --armor --export truenas-cd@localhost > conf/truenas-repo-key.gpg
