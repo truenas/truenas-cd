@@ -63,7 +63,7 @@ export BASEDIR=`pwd`/../
 export CDNAME=TrueNAS
 
 # Building $codename cd set ...
-export CODENAME=bullseye
+export CODENAME=truenas
 
 # By default use Debian installer packages from $CODENAME
 if [ -z "$DI_CODENAME" ]; then
@@ -87,7 +87,7 @@ fi
 #export DI_WWW_HOME=default
 
 # Version number, "2.2 r0", "2.2 r1" etc.
-export DEBVERSION="10.0.0"
+export DEBVERSION="13.0.0"
 
 # Official or non-official set.
 # NOTE: THE "OFFICIAL" DESIGNATION IS ONLY ALLOWED FOR IMAGES AVAILABLE
@@ -120,7 +120,7 @@ fi
 #	      images, however. Also, if you are using an NFS partition for
 #	      some part of this, you must use this option.
 # Paths to the mirrors
-export MIRROR=/srv/mirror/debian
+export MIRROR=/srv/aptly-publish/truenas
 
 # Path of the temporary directory
 export TDIR=/srv/mirror/tmp
@@ -136,7 +136,7 @@ export APTTMP=/srv/mirror/tmp/apt
 # export NONFREE=1
 
 # Do I want to have CONTRIB merged in the CD set
-export CONTRIB=1
+# export CONTRIB=1
 
 # Do I want to have NONFREE on a separate CD (the last CD of the CD set)
 # WARNING: Don't use NONFREE and EXTRANONFREE at the same time !
@@ -150,7 +150,7 @@ export CONTRIB=1
 # If you have a $MIRROR/dists/$CODENAME/local/binary-$ARCH dir with 
 # local packages that you want to put on the CD set then
 # uncomment the following line 
-export LOCAL=1
+# export LOCAL=1
 
 # If your local packages are not under $MIRROR, but somewhere else, 
 # you can uncomment this line and edit to to point to a directory
