@@ -120,7 +120,7 @@ fi
 #	      images, however. Also, if you are using an NFS partition for
 #	      some part of this, you must use this option.
 # Paths to the mirrors
-export MIRROR=/srv/aptly-publish/truenas
+export MIRROR=/srv/aptly-publish/truenas/unstable
 
 # Path of the temporary directory
 export TDIR=/srv/mirror/tmp
