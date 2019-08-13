@@ -267,6 +267,7 @@ $(ADIR)/status:
 		mkdir -p $(ADIR)/$(CODENAME)-$$ARCH/apt/trusted.gpg.d; \
 		ln -s $(TDIR)/archive-keyring/$(ARCHIVE_KEYRING_FILE) $(ADIR)/$(CODENAME)-$$ARCH/apt/trusted.gpg.d; \
 		gpg1 --no-default-keyring --keyring $(ADIR)/$(CODENAME)-$$ARCH/apt/trusted.gpg.d/truenas.gpg --import /srv/aptly-publish/truenas.key; \
+		chown _apt $(ADIR)/$(CODENAME)-$$ARCH/apt/trusted.gpg.d/truenas.gpg; \
 		if [ "$$BACKPORTS"x != ""x ] ; then \
 			mkdir -p $(ADIR)/$(CODENAME)-backports-$$ARCH/apt/trusted.gpg.d; \
 			ln -s $(TDIR)/archive-keyring/$(ARCHIVE_KEYRING_FILE) $(ADIR)/$(CODENAME)-backports-$$ARCH/apt/trusted.gpg.d; \
