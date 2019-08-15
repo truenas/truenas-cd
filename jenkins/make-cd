@@ -12,6 +12,7 @@ pipeline {
     }
     stage('ISO') {
       steps {
+        sh 'cd truenas && make clean'
         sh 'cd truenas && make iso'
         sh 'mkdir -p artifacts'
 	sh 'mv /srv/mirror/debian-cd-test/TrueNAS*.iso artifacts/'
