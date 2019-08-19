@@ -36,9 +36,6 @@ cat > debian-installer+kernel << EOF
 
 #include <debian-installer>
 
-/* TrueNAS */
-truenas-installer
-
 /* Hardware config */
 eject
 pciutils
