@@ -355,7 +355,7 @@ export SNAPURL=Debian=https://snapshot.debian.org/archive/debian/SNAPDATETIME/
 # first stage installer (debian-installer). One package per line.
 # Lines starting with '#' are comments.  The package order is
 # important, as the packages will be installed in the given order.
-#export UDEB_INCLUDE="$BASEDIR"/data/$CODENAME/udeb_include
+export UDEB_INCLUDE="$BASEDIR"/data/$CODENAME/udeb_include
 
 # File with list of packages to exclude as above.
 #export UDEB_EXCLUDE="$BASEDIR"/data/$CODENAME/udeb_exclude
