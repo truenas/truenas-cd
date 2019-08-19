@@ -14,3 +14,6 @@ network-manager
 
 /* Load the TrueNAS essential packages on CD1 */
 #include <truenas-essential>
+
+/* Other Packages to install on CD1 */
+truenas-installer-udeb
