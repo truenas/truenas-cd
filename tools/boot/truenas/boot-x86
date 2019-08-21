@@ -414,12 +414,12 @@ if [ "$SPLASHPNG" ] ; then
 fi
 
 # Add the preseed file for TrueNAS installation
-if [ -e "truenas/conf/preseed.cfg" ] ; then
+if [ -e "$BASEDIR/truenas/conf/preseed.cfg" ] ; then
     INITRD=$CDDIR/$INSTALLDIR/initrd
     INITRDGZ=$INITRD.gz
-    echo "info: Adding truenas/conf/preseed.cfg to $INITRD"
+    echo "info: Adding $BASEDIR/truenas/conf/preseed.cfg to $INITRD"
     INITRDDIR=$TDIR/initrd-$$
-    TNPRESEED="$(pwd)/truenas/conf/preseed.cfg"
+    TNPRESEED="$BASEDIR/truenas/conf/preseed.cfg"
     # Repack initrd with new file
     mkdir -p $INITRDDIR
     (
@@ -435,7 +435,7 @@ if [ -e "truenas/conf/preseed.cfg" ] ; then
     )
     rm -rf $INITRDDIR
 else
-   echo "warning: Missing truenas/conf/preseed.txt file!"
+   echo "warning: Missing $BASEDIR/truenas/conf/preseed.txt file!"
 fi
 
 
