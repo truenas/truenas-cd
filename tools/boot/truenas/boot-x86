@@ -413,6 +413,32 @@ if [ "$SPLASHPNG" ] ; then
     pngtopnm < $SPLASHPNG | ppmquant 16 | pnmtopng  > boot$N/isolinux/splash.png
 fi
 
+# Add the preseed file for TrueNAS installation
+if [ -e "truenas/conf/preseed.cfg" ] ; then
+    INITRD=$CDDIR/$INSTALLDIR/initrd
+    INITRDGZ=$INITRD.gz
+    echo "info: Adding truenas/conf/preseed.cfg to $INITRD"
+    INITRDDIR=$TDIR/initrd-$$
+    TNPRESEED="$(pwd)/truenas/conf/preseed.cfg"
+    # Repack initrd with new file
+    mkdir -p $INITRDDIR
+    (
+        cd $INITRDDIR
+	# There may be multiple hardlinks to the initrd.gz, so
+	# explicitly break the links here
+        zcat $INITRDGZ > $INITRD
+	rm -f $INITRDGZ
+        cp $TNPRESEED $INITRDDIR/
+        echo preseed.cfg | \
+            cpio -oA -H newc -F $INITRD
+	gzip -9 $INITRD
+    )
+    rm -rf $INITRDDIR
+else
+   echo "warning: Missing truenas/conf/preseed.txt file!"
+fi
+
+
 # used by Debian Edu
 if [ "$LOGOPNG" ] ; then
     # Add custom logo to the initrd.gz file, replacing old image
