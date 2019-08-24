@@ -1,4 +1,4 @@
-zfs-modules-4.19.0-5-amd64
+%%ZFSMOD%%
 zfsutils-linux
 zfs-initramfs
 truenas
