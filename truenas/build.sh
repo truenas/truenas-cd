@@ -13,7 +13,7 @@ set_zfs_mod() {
 		echo "ERROR locating zfs-modules package"
 		exit 1
 	fi
-	sed -i'' "s|%%ZFSMOD%%|${ZFSMOD}|g" ../tasks/truenas-truenas-essential
+	sed -i'' "s|%%ZFSMOD%%|${ZFSMOD}|g" ../tasks/truenas/truenas-essential
 	sed -i'' "s|%%ZFSMOD%%|${ZFSMOD}|g" ../truenas/conf/preseed.cfg
 }
 
