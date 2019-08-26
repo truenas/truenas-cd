@@ -438,6 +438,28 @@ else
    echo "warning: Missing $BASEDIR/truenas/conf/preseed.txt file!"
 fi
 
+# Add the ZFS binaries to the installation image
+if [ -e "$BASEDIR/truenas/zfs-initrd" ] ; then
+    INITRD=$CDDIR/$INSTALLDIR/initrd
+    INITRDGZ=$INITRD.gz
+    echo "info: Adding ZFS binaries to initrd image"
+    INITRDDIR=$TDIR/initrd-$$
+    # Repack initrd with new file
+    mkdir -p $INITRDDIR
+    (
+        cd $INITRDDIR
+	# There may be multiple hardlinks to the initrd.gz, so
+	# explicitly break the links here
+        zcat $INITRDGZ > $INITRD
+	rm -f $INITRDGZ
+	sh ${BASEDIR}/truenas/zfs-initrd ${INITRDDIR}/
+        cd ${INITRDDIR} && find . | \
+            cpio -oA -H newc -F $INITRD
+	gzip -9 $INITRD
+    )
+    rm -rf $INITRDDIR
+fi
+
 
 # used by Debian Edu
 if [ "$LOGOPNG" ] ; then
