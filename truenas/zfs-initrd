@@ -41,7 +41,7 @@ if [ $? -ne 0 ] ; then exit 1; fi
 
 chroot ${TGT} apt install -y locales
 if [ $? -ne 0 ] ; then exit 1; fi
-chroot ${TGT} apt install -y ${ZFSDEB} zfsutils-linux
+chroot ${TGT} apt install -y ${ZFSDEB} zfsutils-linux gdisk
 if [ $? -ne 0 ] ; then exit 1; fi
 
 LIBZFS=$(cd ${TGT} && ls ./usr/lib/libzfs*)
@@ -52,6 +52,7 @@ MODS=$(cd ${TGT} && ls ./lib/modules/)
 tar cvf - -C ${TGT} ./usr/sbin/zfs \
 	./usr/sbin/zpool \
 	./usr/sbin/zdb \
+	./usr/sbin/sgdisk \
 	${LIBZFS} \
 	${LIBNV} \
 	./lib/modules/${MODS}/updates/dkms |
