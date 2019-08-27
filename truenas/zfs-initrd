@@ -45,7 +45,7 @@ chroot ${TGT} apt install -y ${ZFSDEB} zfsutils-linux gdisk
 if [ $? -ne 0 ] ; then exit 1; fi
 
 LIBZFS=$(cd ${TGT} && ls ./usr/lib/libzfs*)
-LIBNV=$(cd ${TGT} && ls ./usr/lib/libnv* ./usr/lib/libuu*)
+LIBNV=$(cd ${TGT} && ls ./usr/lib/libnv* ./usr/lib/libuu* ./lib/x86_64-linux-gnu/libpopt* ./lib/x86_64-linux-gnu/libstdc++* ./lib/x86_64-linux-gnu/libgcc*)
 MODS=$(cd ${TGT} && ls ./lib/modules/)
 
 # Create tarball to extract into initrd
