@@ -2,3 +2,4 @@ netcfg
 ethdetect
 pcmciautils-udeb
 truenas-installer
+partman-zfs
