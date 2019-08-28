@@ -59,6 +59,7 @@ tar cvf - -C ${TGT} ./usr/sbin/zfs \
 	tar xf - -C "${1}"
 
 # Indicate to partman that ZFS is a valid option
+mkdir -p "${1}/var/lib/partman"
 touch "${1}/var/lib/partman/zfs"
 
 # Cleanup the chroot
