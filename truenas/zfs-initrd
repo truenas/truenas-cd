@@ -58,6 +58,9 @@ tar cvf - -C ${TGT} ./usr/sbin/zfs \
 	./lib/modules/${MODS}/updates/dkms |
 	tar xf - -C "${1}"
 
+# Indicate to partman that ZFS is a valid option
+touch "${1}/var/lib/partman/zfs"
+
 # Cleanup the chroot
 umount -f $TGT/proc
 umount -f $TGT/sys
