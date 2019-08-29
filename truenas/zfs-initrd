@@ -62,6 +62,11 @@ tar cvf - -C ${TGT} ./usr/sbin/zfs \
 mkdir -p "${1}/var/lib/partman"
 touch "${1}/var/lib/partman/zfs"
 
+# Create the empty /boot/zfs dir
+mkdir -p "${1}/boot/zfs"
+touch "${1}/boot/zfs/.keep_me"
+
+
 # Load ZFS Module at bootup
 mkdir "${1}/lib/debian-installer-startup.d"
 echo "modprobe zfs" > "${1}/lib/debian-installer-startup.d/S03zfs"
