@@ -62,6 +62,10 @@ tar cvf - -C ${TGT} ./usr/sbin/zfs \
 mkdir -p "${1}/var/lib/partman"
 touch "${1}/var/lib/partman/zfs"
 
+# Load ZFS Module at bootup
+mkdir "${1}/etc"
+echo "zfs" > "${1}/etc/modules"
+
 # Cleanup the chroot
 umount -f $TGT/proc
 umount -f $TGT/sys
