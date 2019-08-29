@@ -63,8 +63,9 @@ mkdir -p "${1}/var/lib/partman"
 touch "${1}/var/lib/partman/zfs"
 
 # Load ZFS Module at bootup
-mkdir "${1}/etc"
-echo "zfs" > "${1}/etc/modules"
+mkdir "${1}/lib/debian-installer-startup.d"
+echo "modprobe zfs" > "${1}/lib/debian-installer-startup.d/S03zfs"
+chmod 755 "${1}/lib/debian-installer-startup.d/S03zfs"
 
 # Cleanup the chroot
 umount -f $TGT/proc
