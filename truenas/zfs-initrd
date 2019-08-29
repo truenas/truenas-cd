@@ -41,7 +41,7 @@ if [ $? -ne 0 ] ; then exit 1; fi
 
 chroot ${TGT} apt install -y locales
 if [ $? -ne 0 ] ; then exit 1; fi
-chroot ${TGT} apt install -y ${ZFSDEB} zfsutils-linux gdisk
+chroot ${TGT} apt install -y ${ZFSDEB} zfsutils-linux gdisk dialog
 if [ $? -ne 0 ] ; then exit 1; fi
 
 LIBZFS=$(cd ${TGT} && ls ./usr/lib/libzfs*)
@@ -53,24 +53,24 @@ tar cvf - -C ${TGT} ./usr/sbin/zfs \
 	./usr/sbin/zpool \
 	./usr/sbin/zdb \
 	./usr/sbin/sgdisk \
+	./usr/bin/dialog \
 	${LIBZFS} \
 	${LIBNV} \
 	./lib/modules/${MODS}/updates/dkms |
 	tar xf - -C "${1}"
 
-# Indicate to partman that ZFS is a valid option
-mkdir -p "${1}/var/lib/partman"
-touch "${1}/var/lib/partman/zfs"
+cp start-truenas-install ${1}/usr/sbin/start-truenas-install
+chmod 755 ${1}/usr/sbin/start-truenas-install
 
-# Create the empty /boot/zfs dir
-mkdir -p "${1}/boot/zfs"
-touch "${1}/boot/zfs/.keep_me"
+cat >${1}/etc/inittab << EOF
+::sysinit:/sbin/reopen-console /sbin/start-truenas-install
+tty2::askfirst:-/bin/sh
+tty3::askfirst:-/bin/sh
+tty4::respawn:/usr/bin/tail -f /var/log/syslog
+::restart:/sbin/init
+#tty0::respawn:/sbin/truenas-install
+EOF
 
-
-# Load ZFS Module at bootup
-mkdir "${1}/lib/debian-installer-startup.d"
-echo "modprobe zfs" > "${1}/lib/debian-installer-startup.d/S03zfs"
-chmod 755 "${1}/lib/debian-installer-startup.d/S03zfs"
 
 # Cleanup the chroot
 umount -f $TGT/proc
