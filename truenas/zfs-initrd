@@ -71,6 +71,7 @@ tty4::respawn:/usr/bin/tail -f /var/log/syslog
 #tty0::respawn:/usr/sbin/truenas-install
 EOF
 
+mkdir -p "${1}/sbin"
 cat >"${1}/sbin/start-truenas-install" << EOF
 #!/bin/sh
 
