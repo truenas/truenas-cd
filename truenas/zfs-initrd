@@ -4,6 +4,8 @@ if [ -z "$1" ] ; then
 	exit 1
 fi
 
+CURDIR="$(pwd)"
+
 APTLY="aptly --config ./conf/aptly.conf"
 
 TGT="./zfs-chroot"
@@ -59,10 +61,11 @@ tar cvf - -C ${TGT} ./usr/sbin/zfs \
 	./lib/modules/${MODS}/updates/dkms |
 	tar xf - -C "${1}"
 
-cp start-truenas-install ${1}/usr/sbin/start-truenas-install
-chmod 755 ${1}/usr/sbin/start-truenas-install
+cp ${CURDIR}/start-truenas-install "${1}/usr/sbin/"
+chmod 755 "${1}/usr/sbin/start-truenas-install"
 
-cat >${1}/etc/inittab << EOF
+mkdir -p "${1}/etc"
+cat >"${1}/etc/inittab" << EOF
 ::sysinit:/sbin/reopen-console /sbin/start-truenas-install
 tty2::askfirst:-/bin/sh
 tty3::askfirst:-/bin/sh
