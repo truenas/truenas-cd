@@ -87,6 +87,7 @@ modprobe zfs
 
 # Load installation packages
 udpkg -i /cdrom/pool/main/t/truenas-installer/*.udeb
+udpkg -i /cdrom/pool/main/d/debootstrap/*.udeb
 
 # Drop to debug shell
 /bin/sh
