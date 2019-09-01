@@ -152,7 +152,8 @@ do
 done
 echo '#define DISKNUM ' $DISKNUM    >> $CDDIR/README.diskdefines
 echo '#define DISKNUM'$DISKNUM ' 1' >> $CDDIR/README.diskdefines
-echo -n $VOLID                      >  $BDIR/$DISKNUM.volid
+#echo -n $VOLID                      >  $BDIR/$DISKNUM.volid
+echo 'TRUENAS_INSTALL' >  $BDIR/$DISKNUM.volid
 
 if [ $BINARYDISK = 1 ] ; then
     echo '#define TYPEbinary  1'        >> $CDDIR/README.diskdefines
