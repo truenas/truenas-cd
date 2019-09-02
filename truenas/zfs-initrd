@@ -91,7 +91,7 @@ udpkg -i /cdrom/pool/main/d/debootstrap/*.udeb
 
 # Start the real install on tty0
 cat /etc/inittab | grep -v "^tty0" > /etc/inittab.new
-echo "tty0::respawn:/usr/sbin/truenas-install" > /etc/inittab.new
+echo "tty0::respawn:/usr/sbin/truenas-install" >> /etc/inittab.new
 mv /etc/inittab.new /etc/inittab
 EOF
 chmod 755 "${1}/sbin/start-truenas-install"
