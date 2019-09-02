@@ -68,7 +68,6 @@ tty2::askfirst:-/bin/sh
 tty3::askfirst:-/bin/sh
 tty4::respawn:/usr/bin/tail -f /var/log/syslog
 ::restart:/sbin/init
-#tty0::respawn:/usr/sbin/truenas-install
 EOF
 
 mkdir -p "${1}/sbin"
@@ -77,7 +76,7 @@ cat >"${1}/sbin/start-truenas-install" << EOF
 
 # Mount CDROM
 mkdir /cdrom
-mount -t iso9660 /dev/cdrom /cdrom
+mount -t iso9660 /dev/disk/by-label/TRUENAS_INSTALL /cdrom
 
 # Update modules
 depmod -a
@@ -87,10 +86,13 @@ modprobe zfs
 
 # Load installation packages
 udpkg -i /cdrom/pool/main/t/truenas-installer/*.udeb
+udpkg -i /cdrom/pool/main/p/perl/perl-base*.udeb
 udpkg -i /cdrom/pool/main/d/debootstrap/*.udeb
 
-# Drop to debug shell
-/bin/sh
+# Start the real install on tty0
+cat /etc/inittab | grep -v "^tty0" > /etc/inittab.new
+echo "tty0::respawn:/usr/sbin/truenas-install" > /etc/inittab.new
+mv /etc/inittab.new /etc/inittab
 EOF
 chmod 755 "${1}/sbin/start-truenas-install"
 
