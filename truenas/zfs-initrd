@@ -86,8 +86,9 @@ modprobe zfs
 
 # Load installation packages
 udpkg -i /cdrom/pool/main/t/truenas-installer/*.udeb
-udpkg -i /cdrom/pool/main/p/perl/perl-base*.udeb
+udpkg -i /cdrom/pool/main/p/perl/perl-base*.deb
 udpkg -i /cdrom/pool/main/d/debootstrap/*.udeb
+udpkg -i /cdrom/pool/main/d/debian-archive-keyring/*.udeb
 
 # Start the real install on tty0
 cat /etc/inittab | grep -v "^tty0" > /etc/inittab.new
