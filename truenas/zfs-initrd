@@ -90,6 +90,9 @@ udpkg -i /cdrom/pool/main/p/perl/perl-base*.deb
 udpkg -i /cdrom/pool/main/d/debootstrap/*.udeb
 udpkg -i /cdrom/pool/main/d/debian-archive-keyring/*.udeb
 
+# Start syslogd for tty4
+/sbin/syslogd -m 0 -O /var/log/syslog
+
 # Start the real install on tty0
 cat /etc/inittab | grep -v "^tty0" > /etc/inittab.new
 echo "tty0::respawn:/usr/sbin/truenas-install" >> /etc/inittab.new
