@@ -413,31 +413,6 @@ if [ "$SPLASHPNG" ] ; then
     pngtopnm < $SPLASHPNG | ppmquant 16 | pnmtopng  > boot$N/isolinux/splash.png
 fi
 
-# Add the preseed file for TrueNAS installation
-if [ -e "$BASEDIR/truenas/conf/preseed.cfg" ] ; then
-    INITRD=$CDDIR/$INSTALLDIR/initrd
-    INITRDGZ=$INITRD.gz
-    echo "info: Adding $BASEDIR/truenas/conf/preseed.cfg to $INITRD"
-    INITRDDIR=$TDIR/initrd-$$
-    TNPRESEED="$BASEDIR/truenas/conf/preseed.cfg"
-    # Repack initrd with new file
-    mkdir -p $INITRDDIR
-    (
-        cd $INITRDDIR
-	# There may be multiple hardlinks to the initrd.gz, so
-	# explicitly break the links here
-        zcat $INITRDGZ > $INITRD
-	rm -f $INITRDGZ
-        cp $TNPRESEED $INITRDDIR/
-        echo preseed.cfg | \
-            cpio -oA -H newc -F $INITRD
-	gzip -9 $INITRD
-    )
-    rm -rf $INITRDDIR
-else
-   echo "warning: Missing $BASEDIR/truenas/conf/preseed.txt file!"
-fi
-
 # Add the ZFS binaries to the installation image
 if [ -e "$BASEDIR/truenas/zfs-initrd" ] ; then
     INITRD=$CDDIR/$INSTALLDIR/initrd
@@ -459,7 +434,6 @@ if [ -e "$BASEDIR/truenas/zfs-initrd" ] ; then
     )
     rm -rf $INITRDDIR
 fi
-
 
 # used by Debian Edu
 if [ "$LOGOPNG" ] ; then
@@ -499,8 +473,15 @@ if [ -n "$KERNEL_PARAMS" ]; then
     done
 fi
 
+
 set_default_desktop
 rm -rf cdrom
+
+# Copy over TrueNAS custom grub.cfg
+if [ -e "$BASEDIR/truenas/conf/grub.cfg" ] ; then
+    cp "$BASEDIR/truenas/conf/grub.cfg" "boot$N/isolinux/grub/grub.cfg"
+    cp "$BASEDIR/truenas/conf/grub.cfg" "$CDDIR/boot/grub/grub.cfg"
+fi
 
 if [ -d boot$N/isolinux/grub ] && [ $BOOT_EFI -ne 0 ] ; then
     echo "  Adding EFI boot code for $ARCH on CD$N"
