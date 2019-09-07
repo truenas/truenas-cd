@@ -480,7 +480,6 @@ rm -rf cdrom
 # Copy over TrueNAS custom grub.cfg
 if [ -e "$BASEDIR/truenas/conf/grub.cfg" ] ; then
     cp "$BASEDIR/truenas/conf/grub.cfg" "boot$N/isolinux/grub/grub.cfg"
-    cp "$BASEDIR/truenas/conf/grub.cfg" "$CDDIR/boot/grub/grub.cfg"
 fi
 
 if [ -d boot$N/isolinux/grub ] && [ $BOOT_EFI -ne 0 ] ; then
