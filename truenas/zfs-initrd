@@ -32,7 +32,7 @@ if [ $? -ne 0 ] ; then exit 1; fi
 cp /etc/hosts $TGT/etc/hosts
 
 # Get ZFS Module Name
-ZFSPKG=$(ls /srv/aptly-publish/truenas/unstable/pool/main/z/zfs-dkms-bin/zfs-modules*)
+ZFSPKG=$(ls /srv/aptly-publish/truenas/unstable/pool/main/z/zfs-dkms-bin/zfs-modules-5*)
 ZFSDEB=$(basename $ZFSPKG | cut -d '_' -f 1)
 
 # Setup the apt repo
