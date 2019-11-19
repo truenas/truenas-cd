@@ -77,6 +77,14 @@ else
         INSTALLDIR="$INSTALLDIR_i386"
 fi
 
+if [ -e "$BASEDIR/truenas/make-initrd" ] ; then
+	# Generate the initrd.gz and vmlinuz from current udebs, don't rely on debian
+	sh $BASEDIR/truenas/make-initrd
+	if [ $? -ne 0 ] ; then
+		exit 1
+	fi
+fi
+
 BOOT_IMAGES="cdrom/initrd.gz cdrom/vmlinuz cdrom/debian-cd_info.tar.gz"
 
 # Download boot images.
@@ -84,6 +92,11 @@ for image in $BOOT_IMAGES; do
         if [ ! -e "$image" ]; then
                 dir=$(dirname $image)
                 mkdir -p $dir
+		basename=$(basename $image)
+		if [ -e "$BASEDIR/truenas/${basename}" ] ; then
+			cp $BASEDIR/truenas/${basename} "${image}"
+			continue
+		fi
                 if [ -n "$LOCAL"  -a -f "${LOCALDEBS:-$MIRROR}/dists/$DI_DIST/local/installer-$ARCH/current/images/$image" ]; then
                         cp "${LOCALDEBS:-$MIRROR}/dists/$DI_DIST/local/installer-$ARCH/current/images/$image" "$image"
                 elif [ ! "$DI_WWW_HOME" ];then
