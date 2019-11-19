@@ -83,6 +83,8 @@ if [ -e "$BASEDIR/truenas/make-initrd" ] ; then
 	if [ $? -ne 0 ] ; then
 		exit 1
 	fi
+	mv initrd.gz ${BASEDIR}/truenas/
+	mv vmlinuz ${BASEDIR}/truenas/
 fi
 
 BOOT_IMAGES="cdrom/initrd.gz cdrom/vmlinuz cdrom/debian-cd_info.tar.gz"
