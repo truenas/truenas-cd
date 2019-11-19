@@ -94,6 +94,7 @@ for image in $BOOT_IMAGES; do
                 mkdir -p $dir
 		basename=$(basename $image)
 		if [ -e "$BASEDIR/truenas/${basename}" ] ; then
+			echo "INFO: Using TrueNAS $basename"
 			cp $BASEDIR/truenas/${basename} "${image}"
 			continue
 		fi
