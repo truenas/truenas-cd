@@ -493,11 +493,6 @@ fi
 set_default_desktop
 rm -rf cdrom
 
-# Copy over TrueNAS custom grub.cfg
-if [ -e "$BASEDIR/truenas/conf/grub.cfg" ] ; then
-    cp "$BASEDIR/truenas/conf/grub.cfg" "boot$N/isolinux/grub/grub.cfg"
-fi
-
 if [ -d boot$N/isolinux/grub ] && [ $BOOT_EFI -ne 0 ] ; then
     echo "  Adding EFI boot code for $ARCH on CD$N"
 
@@ -565,6 +560,14 @@ if [ -d boot$N/isolinux/grub ] && [ $BOOT_EFI -ne 0 ] ; then
     fi	
 else
     echo "  No EFI boot code for $ARCH on CD$N"
+fi
+
+if [ -e "$BASEDIR/truenas/conf/grub.cfg" ] ; then
+   # Save old grub.cfg so we can refer to it in case of failures
+   cp "${CDDIR}/boot/grub/grub.cfg" "${CDDIR}/boot/grub/grub.cfg.orig"
+
+   # Copy over TrueNAS custom grub.cfg
+   cp "$BASEDIR/truenas/conf/grub.cfg" "${CDDIR}/boot/grub/grub.cfg"
 fi
 
 # th,th, thats all
