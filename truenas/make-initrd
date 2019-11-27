@@ -44,7 +44,7 @@ chroot ${TGT} apt install -y binutils-common debian-installer git myrepos curl \
        	mklibs-copy genisoimage syslinux pxelinux shim-signed wget \
 	grub-efi-amd64-signed bf-utf-source win32-loader librsvg2-bin \
 	debhelper dctrl-tools bc dosfstools syslinux-utils isolinux \
-	xorriso tofrodos
+	xorriso tofrodos linux-image-amd64
 if [ $? -ne 0 ] ; then exit 1; fi
 
 # Checkout the full debian-installer repos
