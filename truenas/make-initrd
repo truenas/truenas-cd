@@ -52,6 +52,8 @@ chroot ${TGT} git clone --depth=1 https://salsa.debian.org/installer-team/d-i.gi
 chroot ${TGT} bash -c "cd /debian-installer && scripts/git-setup"
 chroot ${TGT} bash -c "cd /debian-installer && mr checkout"
 
+KERNABI=$(chroot ${TGT} ls /boot/vmlinuz-* | cut -d '-' -f 2-3)
+
 # Set our build defaults to truenas
 echo "deb [trusted=yes] http://127.0.0.1/truenas/unstable/ truenas main/debian-installer" \
 	> ${TGT}/debian-installer/installer/build/sources.list.udeb.local
@@ -59,7 +61,7 @@ echo "DEBIAN_RELEASE = truenas" \
 	>> ${TGT}/debian-installer/installer/build/config/common
 echo "DEBIAN_VERSION = truenas" \
 	>> ${TGT}/debian-installer/installer/build/config/common
-echo "LINUX_KERNEL_ABI=5.2.0-3" \
+echo "LINUX_KERNEL_ABI=${KERNABI}" \
 	>> ${TGT}/debian-installer/installer/build/config/common
 chroot ${TGT} bash -c "cd /debian-installer/installer/build && make build_cdrom_isolinux"
 
