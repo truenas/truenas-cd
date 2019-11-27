@@ -52,7 +52,7 @@ chroot ${TGT} git clone --depth=1 https://salsa.debian.org/installer-team/d-i.gi
 chroot ${TGT} bash -c "cd /debian-installer && scripts/git-setup"
 chroot ${TGT} bash -c "cd /debian-installer && mr checkout"
 
-KERNABI=$(chroot ${TGT} ls /boot/vmlinuz-* | cut -d '-' -f 2-3)
+KERNABI=$(chroot ${TGT} bash -c "ls /boot/vmlinuz-* | cut -d '-' -f 2-3")
 
 # Set our build defaults to truenas
 echo "deb [trusted=yes] http://127.0.0.1/truenas/unstable/ truenas main/debian-installer" \
