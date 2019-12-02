@@ -18,6 +18,8 @@ set_zfs_mod() {
 
 case $1 in
 	clean)
+		umount -f /srv/mirror/tmp/truenas/zfs-chroot/proc || true
+		umount -f /srv/mirror/tmp/truenas/zfs-chroot/sys || true
 		make -C ../ distclean
 		;;
 	iso)
