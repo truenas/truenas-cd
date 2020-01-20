@@ -234,8 +234,9 @@ ATTEMPT_FALLBACK=yes
 # DLBD:              standard 50 GB dual-layer blu-ray
 # STICK<X>GB:        <X>GB USB stick or similar
 # CUSTOM:            up to you - specify a size to go with it (in 2K blocks)
-export DISKTYPE=DVD
-#export DISKTYPE=CUSTOM
+export DISKTYPE=CUSTOM
+# Up to 2GB size
+export CUSTOMSIZE=1000000
 #export CUSTOMSIZE=XXXX
 # If you want to over-ride this choice (e.g. to make a larger version of a given disk),
 # you can do the following:
