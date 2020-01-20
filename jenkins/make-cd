@@ -17,7 +17,7 @@ pipeline {
         sh 'cd truenas && make iso'
         sh 'rm -rf artifacts || true'
         sh 'mkdir -p artifacts'
-	sh 'mv /srv/mirror/debian-cd-test/TrueNAS*.iso artifacts/'
+	sh 'mv /srv/mirror/debian-cd-test/TrueNAS*.iso artifacts/TrueNAS-SCALE-amd64.iso'
       }
     }
   }
