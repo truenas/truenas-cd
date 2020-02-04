@@ -74,6 +74,22 @@ mkdir -p "${1}/sbin"
 cat >"${1}/sbin/start-truenas-install" << EOF
 #!/bin/sh
 
+for i in 1 2 3 4 5;
+do
+	if [ -e /dev/disk/by-label/TRUENAS_INSTALL ]; then
+		break
+	else
+		echo "Waiting 5 seconds for root device to settle"
+		sleep 5
+	fi
+done
+
+if [ ! -e /dev/disk/by-label/TRUENAS_INSTALL ]; then
+	echo "Unable to find /dev/disk/by-label/TRUENAS_INSTALL, dropping to shell"
+	/bin/sh
+	exit 1
+fi
+
 # Mount CDROM
 mkdir /cdrom
 mount -t iso9660 /dev/disk/by-label/TRUENAS_INSTALL /cdrom
