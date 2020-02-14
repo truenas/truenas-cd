@@ -110,8 +110,9 @@ udpkg -i /cdrom/pool/main/d/debian-archive-keyring/*.udeb
 /sbin/syslogd -m 0 -O /var/log/syslog
 
 # Start the real install on tty0
-cat /etc/inittab | grep -v "^tty0" > /etc/inittab.new
+cat /etc/inittab | grep -v "^tty0" | grep -v "^ttyS0" > /etc/inittab.new
 echo "tty0::respawn:/usr/sbin/truenas-install" >> /etc/inittab.new
+echo "ttyS0::respawn:/usr/sbin/truenas-install" >> /etc/inittab.new
 mv /etc/inittab.new /etc/inittab
 EOF
 chmod 755 "${1}/sbin/start-truenas-install"
