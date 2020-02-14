@@ -227,6 +227,15 @@ if [ -e "$BASEDIR/truenas/conf/isolinux-menu.cfg" ] ; then
 fi
 
 
+if [ -e "$BASEDIR/truenas/conf/isolinux.cfg" ] ; then
+   # Save old menu.cfg so we can refer to it in case of failures
+   cp "boot$N/isolinux/isolinux.cfg" "boot$N/isolinux/isolinux.cfg.orig"
+
+   # Copy over TrueNAS custom isolinux menu
+   cp "$BASEDIR/truenas/conf/isolinux.cfg" "boot$N/isolinux/isolinux.cfg"
+fi
+
+
 # Not everything in the tarball is isolinux stuff
 if [ -e boot$N/isolinux/win32-loader.ini ] ; then
     echo "  Moving extra loader files into place:"
