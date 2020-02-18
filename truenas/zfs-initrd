@@ -106,6 +106,7 @@ udpkg -i /cdrom/pool/main/p/perl/perl-base*.deb
 udpkg -i /cdrom/pool/main/d/debootstrap/*.udeb
 udpkg -i /cdrom/pool/main/d/debian-archive-keyring/*.udeb
 udpkg -i /cdrom/pool/main/s/setserial/setserial*.deb
+udpkg -i /cdrom/pool/main/libs/libsigsegv/*.deb
 udpkg -i /cdrom/pool/main/g/gawk/gawk*.deb
 
 # Start syslogd for tty4
