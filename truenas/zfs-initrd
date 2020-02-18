@@ -105,6 +105,8 @@ udpkg -i /cdrom/pool/main/t/truenas-installer/*.udeb
 udpkg -i /cdrom/pool/main/p/perl/perl-base*.deb
 udpkg -i /cdrom/pool/main/d/debootstrap/*.udeb
 udpkg -i /cdrom/pool/main/d/debian-archive-keyring/*.udeb
+udpkg -i /cdrom/pool/main/s/setserial/setserial*.deb
+udpkg -i /cdrom/pool/main/g/gawk/gawk*.deb
 
 # Start syslogd for tty4
 /sbin/syslogd -m 0 -O /var/log/syslog
