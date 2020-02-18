@@ -1,5 +1,7 @@
 netcfg
 ethdetect
+gawk
 pcmciautils-udeb
+setserial
 truenas-installer
 partman-zfs
