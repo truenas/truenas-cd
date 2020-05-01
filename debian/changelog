@@ -1,17 +1,82 @@
-debian-cd (3.1.25) UNRELEASED; urgency=medium
+debian-cd (3.1.29) UNRELEASED; urgency=medium
 
-  [ Steve McIntyre ]
-  * Change a load of http URLs to use https instead,
-  * Add shim-signed and grub-efi-arm64-signed to the arm64 package
-    list
-  * Start bullseye development, copy the buster dirs to bullseye as a
-    start.
-  * Stop producing MD5SUMS and SHA1SUMS files by default
+  [ Raphaël Hertzog ]
+  * Fix tools/sort_deps to not accept udeb as solutions to dependencies of
+    regular deb (and vice-versa).
 
   [ Holger Levsen ]
-  * Bump standards version to 4.4.0, no changes needed.
+  * Drop myself from uploaders.
 
- -- Steve McIntyre <93sam@debian.org>  Wed, 26 Jun 2019 18:26:02 +0100
+  [ Steve McIntyre ]
+  * Add easier support for extra archive signing keys - list
+    fingerprints in ARCHIVE_EXTRA_KEYS
+  * Exclude lilo-installer (and elilo-installer) for all arches, not
+    just amd64. This was an oversight before.
+  * Enable graphical installer for arm64 too, now that d-i builds
+    should include it too.
+
+ -- Raphaël Hertzog <raphael@offensive-security.com>  Thu, 13 Feb 2020 15:07:42 +0100
+
+debian-cd (3.1.28) unstable; urgency=medium
+
+  [ Steve McIntyre ]
+  * Add a "with firmware" text to the DISKINFO string when appropriate
+    Closes: #944207
+
+  * Major changes to jigdo support - add support for the new
+    sha256-based v2 format so we can think about phasing out
+    dependencies on md5. Will still build using md5 stuff for
+    compatibility for now - we need a new xorriso release (1.5.3?) to
+    hit the archive and (more importantly!) users to get current jigdo
+    clients too before we can switch. Closes: #949965
+
+  [ Samuel Thibault ]
+  * Drop support for xorriso versions before 1.2.2
+  * Add hurd-i386 EFI support.
+
+  [ John Paul Adrian Glaubitz ]
+  * Add missing export keyword for ARCHIVE_KEYRING_FILE and
+    ARCHIVE_KEYRING_PACKAGE variables in CONF.sh.
+
+  [ Raphaël Hertzog ]
+  * Fix a quoting bug that leads to failure in start_new_disc
+    when CODENAME is kali-last-snapshot.
+  * Add symlinks for kali-last-snapshot in data/, tasks/ and tools/boot/.
+  * Add a default value to JIGDO_CHECKSUM.
+
+ -- Steve McIntyre <93sam@debian.org>  Tue, 28 Jan 2020 12:53:41 +0000
+
+debian-cd (3.1.27) unstable; urgency=medium
+
+  [ Samuel Thibault ]
+  * Keep grub resolution in EFI boot, to avoid tiny fonts (closes: #935546).
+
+  [ Steve McIntyre ]
+  * Update arch lists in build_all.sh, remove arches not in bullseye
+  * Update ordering of checksumming in imagesums
+
+  [ Holger Levsen ]
+  * contrib: Updated from setup.git/bullseye/.
+  * d/control: Bump standards version to 4.4.1, no changes needed.
+
+ -- Holger Levsen <holger@debian.org>  Wed, 23 Oct 2019 18:06:41 +0200
+
+debian-cd (3.1.26) unstable; urgency=medium
+
+  [ Steve McIntyre ]
+  * Start bullseye development, copy the buster dirs to bullseye as a
+    start.
+  * Stop producing MD5SUMS and SHA1SUMS files by default.
+  * Add shim-signed and grub-efi-arm64-signed to the arm64 package
+    list.
+  * Change a load of http URLs to use https instead.
+
+  [ Holger Levsen ]
+  * d/control:
+    - bump standards version to 4.4.0, no changes needed.
+    - bump debhelper-compat to 12.
+
+ -- Holger Levsen <holger@debian.org>  Sat, 10 Aug 2019 11:50:47 +0200
 
 debian-cd (3.1.25) unstable; urgency=medium
 

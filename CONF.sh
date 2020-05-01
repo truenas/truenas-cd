@@ -181,6 +181,12 @@ export CONTRIB=1
 # partition than your source files.
 # export COPYLINK=1
 
+# Choose the checksum algorithm used in jigdo and template
+# files. Older jigdo tools can only support md5; but we want to move
+# to sha256 as a better checksum. Depends on xorriso 1.5.3+ to support
+# sha256
+export JIGDO_CHECKSUM="md5"
+
 # Options
 # export MKISOFS=mkisofs
 # export MKISOFS_OPTS="-r"		#For normal users
@@ -196,9 +202,14 @@ export CONTRIB=1
 #export amd64_MKISOFS_OPTS="-as mkisofs -r -checksum_algorithm_iso sha256,sha512"
 
 # Keyring (defaults):
-#ARCHIVE_KEYRING_PACKAGE=debian-archive-keyring
+#export ARCHIVE_KEYRING_PACKAGE=debian-archive-keyring
 # The path to the keyring file relative to $TDIR/archive-keyring/
-#ARCHIVE_KEYRING_FILE=usr/share/keyrings/debian-archive-keyring.gpg
+#export ARCHIVE_KEYRING_FILE=usr/share/keyrings/debian-archive-keyring.gpg
+
+# Extra keys that you might want apt to trust. List their fingerprints
+# here and debian-cd will grab them from the user's keyring as needed
+# (The example here is the buster release key)
+#export ARCHIVE_EXTRA_KEYS="80D15823B7FD1561F9F7BCDDDC30D7C23CBBABEE"
 
 # By default we use debootstrap --no-check-gpg to find out the minimal set
 # of packages because there's no reason to not trust the local mirror. But
