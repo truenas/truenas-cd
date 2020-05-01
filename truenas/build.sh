@@ -8,7 +8,7 @@ exit_err() {
 }
 
 set_zfs_mod() {
-	ZFSMOD=$(ls /srv/aptly-publish/truenas/unstable/pool/main/z/zfs-dkms-bin/ | grep zfs-modules-5.4 | sort -r | head -n 1 | cut -d '_' -f 1)
+	ZFSMOD=$(ls /srv/aptly-publish/truenas/unstable/pool/main/z/zfs-dkms-bin/ | grep zfs-modules-5.5 | sort -r | head -n 1 | cut -d '_' -f 1)
 	if [ -z "$ZFSMOD" ] ; then
 		echo "ERROR locating zfs-modules package"
 		exit 1
